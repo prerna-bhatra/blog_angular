@@ -1,0 +1,36 @@
+*
+{
+    overflow-x: hidden;
+}
+#BlogComp
+{
+    margin-top: 50px;
+}
+#Vcomply
+{
+    padding: 30px 40px 80px 120px;
+    background-color: #f2bf11;
+    border-bottom: 1px solid black;
+}
+
+#Vcomimg img{
+    margin-top: 50px;
+    width: 100%;
+    /* animation: rotation 3s infinite linear; */
+}
+
+#BlogsArea{
+    padding: 20px 100px 100px 100px;
+}
+#BlogDiv{
+    cursor: pointer;
+}
+
+/* @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  } */
