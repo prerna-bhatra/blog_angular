@@ -20,7 +20,7 @@ declare var ClientJS: any;
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private http:HttpClient, private router: Router,private loginService:ConfigService) { }
+  constructor(private http:HttpClient, private router: Router,private loginService:ConfigService,private dataSharingService:ConfigService) { }
   fingerprint:any
   logindata:any
   isUserLoggedIn:any
@@ -63,7 +63,7 @@ export class LoginFormComponent implements OnInit {
     .subscribe(data=>{
       console.log("success",typeof(data))
      localStorage.setItem('User',JSON.stringify( data));
-     this.loginService.isUserLoggedIn.next(true)
+     this.dataSharingService.isUserLoggedIn.next(true)
      //this.router.navigate([NavbarComponent]);
      
      this.router.navigate(['/'])

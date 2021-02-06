@@ -6,10 +6,12 @@ import {LoginFormComponent} from './login-form/login-form.component'
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component'
 import {HomeComponent} from './home/home.component'
 import {NavbarComponent} from './navbar/navbar.component'
+import {WriteBlogComponent} from './write-blog/write-blog.component'
 const routes: Routes = [
   {path:'',component:HomeComponent},
   { path: 'login', component: LoginFormComponent },
   { path: 'signup', component: SignupFormComponent },
+  { path: 'write', component: WriteBlogComponent },
   {path:'nav',component:NavbarComponent},
   { path: '**', component: PageNotFoundComponent },
 ];

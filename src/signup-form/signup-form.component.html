@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6" id="FormData">   
         <h3>Create Account</h3>
-        <form [formGroup]="form" (ngSubmit)="login()">
+        <form [formGroup]="form" >
             <div *ngIf="form.errors" class="alert alert-danger"></div>
             <div class="form-group">
                 
@@ -41,7 +41,7 @@
                         <div *ngIf="password.errors.pattern">Password should be start with a number ,and length should be 8 to 10 </div>
                     </div>
             </div>
-            <button class="btn btn-success" type="submit">Sign Up</button>
+            <button class="btn btn-success" type="submit" (click)="signupApi()">Sign Up</button>
         </form>
         <br/>
         <h6>Already Having Account?<a routerLink="/login" routerLinkActive="active">Login</a> </h6>

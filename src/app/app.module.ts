@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfigComponent } from './config/config.component';
+import { WriteBlogComponent } from './write-blog/write-blog.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ConfigComponent } from './config/config.component';
     PageNotFoundComponent,
     HomeComponent,
     NavbarComponent,
-    ConfigComponent
+    ConfigComponent,
+    WriteBlogComponent
   ],
   imports: [
     BrowserModule,

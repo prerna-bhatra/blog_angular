@@ -4,7 +4,10 @@ import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import {IEtrendingBlogs,IEnewBlogs,IErestBlogs} from './home/home'
 import {IElogin} from './login-form/login'
+import {IESignup} from '../signup-form/signup'
+import {IEBlog} from './write-blog/writeblog'
 import { BehaviorSubject } from 'rxjs';
+
 //import { fingerprint } from '@angular/compiler/src/i18n/digest';
 
 declare var ClientJS: any;
@@ -16,6 +19,7 @@ export class ConfigService {
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   fingerprint:any= new ClientJS().getFingerprint()
+  UserId=JSON.parse(localStorage.getItem('User'))
 
  
   
@@ -39,6 +43,20 @@ export class ConfigService {
   login(LoginCredentials:IElogin):Observable<any>{
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/signin/${this.fingerprint}`,LoginCredentials)
   }
+
+  signup(SigupCredentials:IESignup):Observable<any>{
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/signup`,SigupCredentials)
+  }
+  
+  signout(){
+
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/signout/${this.fingerprint}`)
+  }
+
+  WriteBlog(FormData:IEBlog):Observable<any>{
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/blog/${this.UserId.user._id}`,FormData)
+  }
+
 
 
 }
