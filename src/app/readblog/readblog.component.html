@@ -1,0 +1,26 @@
+<div class="container" id="ReadBlogDiv" *ngIf="maxLimit==false ">
+    <div class="row">
+        <h1>{{BlogData?.BlogHeading}}</h1>
+        <div id="ImageDiv" class="col-md-8">
+                <img [src]="BlogImg">
+        </div>
+        <div class="col-md-4">
+            <button (click)="listen()">Listen</button>
+            <br/> <br/> 
+            <button (click)="pause()">Pause</button>
+            <br/> <br/> 
+            <button (click)="resume()">Resume</button>
+            <br/> <br/> 
+            <button (click)="cancel()">Cancel</button>
+            <br/> <br/> 
+            <h4><i class="fas fa-book-open"></i> {{BlogData?.ViewCount}}</h4>
+        </div>
+        <div class="col-md-12">
+            {{BlogData?.BlogContent}}
+        </div>
+    </div>
+</div>
+
+<div id="MaxLimitDiv" *ngIf="maxLimit==true">
+    <h1 class="text text-danger">{{BlogData}}</h1>
+</div>

@@ -1,0 +1,29 @@
+<div id="MyBlogDiv" *ngIf="LoadApi==true" class="container">
+    <div id="GraphStats" *ngIf="showGraph==true">
+        
+    </div>
+    <div class="row">
+        <div id="MyBlogDivSingle"  *ngFor="let myblog of MyBlogs.data" class="col-md-12" >
+            <div id="MyBlogId">
+               <a [routerLink]="['/read',myblog._id]" routerLinkActive="active"> 
+                   <h3>{{myblog.BlogHeading}}</h3>
+                   <p>{{myblog.BlogContent.slice(0,160)}}...</p>
+                </a>
+            </div>  
+            <div>
+        <p>Posted On{{myblog.createdAt.slice(0,10)}} . &nbsp; {{myblog.BlogContent.length/200}} min read  &nbsp; ( {{myblog.BlogContent.length}} words ) so far &nbsp; <li class="dropdown nav navbar-nav navbar-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><button (click)="showstats(myblog.ViewStats)">stats</button></li>
+              <li><button>delete</button></li>
+              <li><button>Edit</button></li>
+            </ul>
+          </li> </p> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  id="MyBlogLoad" *ngIf="LoadApi==false">
+    <h1>Please Wait ...</h1>
+</div>

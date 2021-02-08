@@ -6,6 +6,8 @@ import {IEtrendingBlogs,IEnewBlogs,IErestBlogs} from './home/home'
 import {IElogin} from './login-form/login'
 import {IESignup} from '../signup-form/signup'
 import {IEBlog} from './write-blog/writeblog'
+import {IEreadblogvalue} from './readblog/readblog'
+import {IEMyBlog} from './myblog/myblog'
 import { BehaviorSubject } from 'rxjs';
 
 //import { fingerprint } from '@angular/compiler/src/i18n/digest';
@@ -21,8 +23,6 @@ export class ConfigService {
   fingerprint:any= new ClientJS().getFingerprint()
   UserId=JSON.parse(localStorage.getItem('User'))
 
- 
-  
   constructor(private http: HttpClient) { }
   configUrl = 'assets/config.json';
   
@@ -53,9 +53,27 @@ export class ConfigService {
     return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/signout/${this.fingerprint}`)
   }
 
+
+
   WriteBlog(FormData:IEBlog):Observable<any>{
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/blog/${this.UserId.user._id}`,FormData)
   }
+
+  ReadBlog(blogId:IEreadblogvalue):Observable<any>{
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/ReadBlog/${blogId}/${this.fingerprint}`,{})
+  }
+
+  BlogImg(blogId:IEreadblogvalue):Observable<any>{
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${blogId}`)
+  }
+
+
+  FetchMyBlog(): Observable<IEMyBlog[]>{
+    return this.http.get<IEMyBlog[]>(`https://desolate-sierra-34755.herokuapp.com/api/MyBlogs/${this.UserId.user._id}`)
+  }
+
+
+
 
 
 

@@ -1,0 +1,31 @@
+#MyBlogDiv
+{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+#MyBlogLoad
+{
+    margin-top: 100px;
+}
+#MyBlogId
+{
+    padding: 10px 10px 10px 10px;
+
+    margin: 2px 2px 2px 2px ;
+}
+#MyBlogId a h3,p{
+    color:  black;
+   
+}
+#MyBlogId a h3:hover,p:hover{
+    text-decoration: none;
+}
+
+#MyBlogDivSingle
+{
+    border-bottom: 1px solid gray;
+}
+#myblogAction
+{
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@
   <div class="col-md-7">
     <h1 style="font-size: 60px;font-weight: bold;">Explore new <br/> perspectives</h1>
     <h4>Read and share ideas from independent voices, <br/> world-class  publications, 
-        and experts from  around <br/> the globe.  Everyone's welcome. <a href="#">Learn More</a> </h4>
+        and experts from  around <br/> the globe.  Everyone's welcome. <a href="https://www.v-comply.com/">Learn More</a> </h4>
         <br/>
     <a routerLink="/write" routerLinkActive="active"  style="padding: 10px 15px 10px 15px ;background-color: #f2bf11; border: 1px solid black;" class="btn">Get Started</a>
   </div>
@@ -16,9 +16,12 @@
     <div class="col-md-12">
        <h2><i class="fa fa-line-chart "></i>Trending on Vcomply</h2>
        <div class="row">
-            <div *ngFor="let trendblog of TrendingBlogs" class="col-md-4 " (click)="alert()"  id="BlogDiv">
-               <h4>{{trendblog.BlogHeading}}</h4>
-               <p>{{trendblog.BlogContent.slice(0,100)}}...</p>
+            <div *ngFor="let trendblog of TrendingBlogs" class="col-md-4 "   id="BlogDiv">
+               <a [routerLink]="['/read',trendblog._id]" routerLinkActive="active">
+                  <h4>{{trendblog.BlogHeading}}</h4>
+                  <p>{{trendblog.BlogContent.slice(0,100)}}...</p>
+               </a>
+               <p>Posted On{{trendblog.createdAt.slice(0,10)}} . &nbsp; {{trendblog.BlogContent.length/200}} min read  &nbsp; ( {{trendblog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
        </div>
        <hr/>
@@ -26,19 +29,25 @@
     <div class="col-md-12">
         <h2>What's New</h2>
        <div class="row">
-            <div *ngFor="let NewBlog of NewBlogs" class="col-md-4 " (click)="alert()"  id="BlogDiv">
+            <div *ngFor="let NewBlog of NewBlogs" class="col-md-4 "   id="BlogDiv">
+               <a  [routerLink]="['/read',NewBlog._id]" routerLinkActive="active">
                <h4>{{NewBlog.BlogHeading}}</h4>
                <p>{{NewBlog.BlogContent.slice(0,100)}}...</p>
+              </a>
+              <p>Posted On{{NewBlog.createdAt.slice(0,10)}} . &nbsp; {{NewBlog.BlogContent.length/200}} min read  &nbsp; ( {{NewBlog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
        </div>
        <hr/>
     </div>
     <div class="col-md-12">
-        <h2>What's New</h2>
+        <h2>More Blogs for you</h2>
        <div class="row">
-            <div *ngFor="let restblog of RestBlogs" class="col-md-4 " (click)="alert()"  id="BlogDiv">
-               <h4>{{restblog.BlogHeading}}</h4>
-               <p>{{restblog.BlogContent.slice(0,100)}}...</p>
+            <div *ngFor="let restblog of RestBlogs" class="col-md-4 "  id="BlogDiv">
+               <a    [routerLink]="['/read',restblog._id]" routerLinkActive="active">
+                  <h4>{{restblog.BlogHeading}}</h4>
+                  <p>{{restblog.BlogContent.slice(0,100)}}...</p>
+               </a>
+               <p>Posted On{{restblog.createdAt.slice(0,10)}} . &nbsp; {{restblog.BlogContent.length/200}} min read  &nbsp; ( {{restblog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
        </div>
        <hr/>

@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
      }
      else{
        this.isUserLoggedIn=false
+       console.log("hello")
      }
   }
 

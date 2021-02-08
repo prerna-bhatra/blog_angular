@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfigComponent } from './config/config.component';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
+import { ReadblogComponent } from './readblog/readblog.component';
+import { MyblogComponent } from './myblog/myblog.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 
 @NgModule({
@@ -24,14 +27,17 @@ import { WriteBlogComponent } from './write-blog/write-blog.component';
     HomeComponent,
     NavbarComponent,
     ConfigComponent,
-    WriteBlogComponent
+    WriteBlogComponent,
+    ReadblogComponent,
+    MyblogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

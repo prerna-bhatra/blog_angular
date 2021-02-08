@@ -33,8 +33,6 @@ export class HomeComponent implements OnInit {
           }))
           
 
-   
-
           this.RestBlogService.FetchRestBlogs()
           .subscribe((RestBlogData=>
             {
@@ -59,9 +57,6 @@ export class HomeComponent implements OnInit {
   {
     this.RestBlogs=RestBlogData.result
   }
-  alert()
-  {
-    console.log("click")
-  }
+  
 
 }
