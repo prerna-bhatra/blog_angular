@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   Searching:boolean=false
   LoadSearchApi:boolean=false
   SearchingTag:any
+  SearchedData:any
+  noDataFound:Boolean=false
   constructor(private http:HttpClient,private trendService:ConfigService,private NewBlogService:ConfigService,private RestBlogService:ConfigService,private SearchService:ConfigService) { }
 
   ngOnInit(): void {
@@ -82,16 +84,24 @@ export class HomeComponent implements OnInit {
       // subscription for response
     )
     .subscribe(result=>{
-      this.Searching=false
+      const that = this; 
       this.LoadSearchApi=true
+      this.SearchedData=result.data
       console.log(result)
+      if(result.data.length==0)
+      {
+        setTimeout(function(){
+         alert("data not found");
+        //// that.noDataFound=true
+       // that.LoadSearchApi=false
+           },5000);
+      }
+
+    //  console.log(that.noDataFound)
     },
     err=>{
       console.log(err)
     })
   }
-  
-  
-
 
 }

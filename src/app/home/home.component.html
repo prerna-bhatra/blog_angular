@@ -16,8 +16,19 @@
       <input  id="SearchInput"  placeholder="filter by tag name" class="form-control" (keyup)="SearchTag($event)">   
    </div>
 </div>
-<div class="container row" id="BlogsArea" *ngIf="Searching===false">
-  
+
+<div class="container row" id="BlogsArea" >
+   <div *ngIf="Searching==true " id="SearchDivArea">
+      <h6 *ngIf="LoadSearchApi===false">
+         searching...
+      </h6>
+      <div *ngFor="let Searcheditem of SearchedData">
+        <a >
+         <h4><b>{{Searcheditem.BlogHeading}}</b></h4>
+        </a>
+      </div>
+     
+   </div>
     <div class="col-md-12">
        <h4><b>TRENDING ON VCOMPLY</b></h4>
        <div class="row">
@@ -62,12 +73,6 @@
     </div>
 </div>
 
-<div *ngIf="Searching===true && LoadSearchApi==false ">
-   searching...
-</div>
 
-<div *ngIf="Searching===true && LoadSearchApi==true ">
-   seracheddata
-</div>
 
 </div>
