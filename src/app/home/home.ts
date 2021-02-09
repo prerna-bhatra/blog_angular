@@ -17,3 +17,8 @@ export interface IErestBlogs{
     blogHeadng:string,
     blogContent:string
 }
+
+export interface IEsearchitem
+{
+    searchValue: string
+}

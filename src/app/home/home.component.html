@@ -11,15 +11,20 @@
     <img src="assets/images/vcomply.jpg">
   </div>
 </div>
-<div class="container row" id="BlogsArea">
-    
+<div class="container">
+   <div class="col-md-3">
+      <input  id="SearchInput"  placeholder="filter by tag name" class="form-control" (keyup)="SearchTag($event)">   
+   </div>
+</div>
+<div class="container row" id="BlogsArea" *ngIf="Searching===false">
+  
     <div class="col-md-12">
-       <h2><i class="fa fa-line-chart "></i>Trending on Vcomply</h2>
+       <h4><b>TRENDING ON VCOMPLY</b></h4>
        <div class="row">
             <div *ngFor="let trendblog of TrendingBlogs" class="col-md-4 "   id="BlogDiv">
+               <a href="#"><h5>Published By <i>{{trendblog.UserName}}</i></h5></a>
                <a [routerLink]="['/read',trendblog._id]" routerLinkActive="active">
-                  <h4>{{trendblog.BlogHeading}}</h4>
-                  <p>{{trendblog.BlogContent.slice(0,100)}}...</p>
+                  <h4><b>{{trendblog.BlogHeading}}</b></h4>
                </a>
                <p>Posted On{{trendblog.createdAt.slice(0,10)}} . &nbsp; {{trendblog.BlogContent.length/200}} min read  &nbsp; ( {{trendblog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
@@ -27,12 +32,12 @@
        <hr/>
     </div>
     <div class="col-md-12">
-        <h2>What's New</h2>
+      <h4><b>NEW ON VCOMPLY</b></h4>
        <div class="row">
             <div *ngFor="let NewBlog of NewBlogs" class="col-md-4 "   id="BlogDiv">
+               <a href="#"><h5>Published By <i>{{NewBlog.UserName}}</i></h5></a>
                <a  [routerLink]="['/read',NewBlog._id]" routerLinkActive="active">
-               <h4>{{NewBlog.BlogHeading}}</h4>
-               <p>{{NewBlog.BlogContent.slice(0,100)}}...</p>
+               <h4><b>{{NewBlog.BlogHeading}}</b></h4>
               </a>
               <p>Posted On{{NewBlog.createdAt.slice(0,10)}} . &nbsp; {{NewBlog.BlogContent.length/200}} min read  &nbsp; ( {{NewBlog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
@@ -40,17 +45,29 @@
        <hr/>
     </div>
     <div class="col-md-12">
-        <h2>More Blogs for you</h2>
+      <h4><b>MORE BLOGS FOR YOU</b></h4>
        <div class="row">
             <div *ngFor="let restblog of RestBlogs" class="col-md-4 "  id="BlogDiv">
+               <a href="#"><h5>Published By <i>{{restblog.UserName}}</i></h5></a>
+               <br/>
                <a    [routerLink]="['/read',restblog._id]" routerLinkActive="active">
-                  <h4>{{restblog.BlogHeading}}</h4>
-                  <p>{{restblog.BlogContent.slice(0,100)}}...</p>
+                 
+                  <h4><b>{{restblog.BlogHeading}}</b></h4>
+
                </a>
-               <p>Posted On{{restblog.createdAt.slice(0,10)}} . &nbsp; {{restblog.BlogContent.length/200}} min read  &nbsp; ( {{restblog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
+               <p>Posted On {{restblog.createdAt.slice(0,10)}}  . &nbsp; {{restblog.BlogContent.length/200}} min read  <br/> ( {{restblog.BlogContent.length}} words ) so far &nbsp; <i id="blogAction" class="fas fa-share"></i> </p> 
             </div>
        </div>
        <hr/>
     </div>
 </div>
+
+<div *ngIf="Searching===true && LoadSearchApi==false ">
+   searching...
+</div>
+
+<div *ngIf="Searching===true && LoadSearchApi==true ">
+   seracheddata
+</div>
+
 </div>

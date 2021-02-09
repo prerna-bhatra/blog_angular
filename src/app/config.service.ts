@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import {IEtrendingBlogs,IEnewBlogs,IErestBlogs} from './home/home'
+import {IEtrendingBlogs,IEnewBlogs,IErestBlogs,IEsearchitem} from './home/home'
 import {IElogin} from './login-form/login'
 import {IESignup} from '../signup-form/signup'
 import {IEBlog} from './write-blog/writeblog'
 import {IEreadblogvalue} from './readblog/readblog'
 import {IEMyBlog} from './myblog/myblog'
 import { BehaviorSubject } from 'rxjs';
+
 
 //import { fingerprint } from '@angular/compiler/src/i18n/digest';
 
@@ -73,8 +74,9 @@ export class ConfigService {
   }
 
 
-
-
-
+  SearchByTag(SearchItem:IEsearchitem):Observable<any>{
+    console.log("searchitem in service",SearchItem.searchValue)
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/SearchByHashTag`,{hashtag: SearchItem.searchValue})
+  }
 
 }
