@@ -4,6 +4,7 @@ import {IEMyBlog} from './myblog'
 import * as moment from 'moment';
 import * as _ from "lodash";
 
+
 let  GraphData:any
 
 @Component({
@@ -18,10 +19,19 @@ export class MyblogComponent implements OnInit {
   LoadApi:boolean=false
   showGraph:boolean=false
   Week:any
+  chartColumns:any=["week","views"]
+  charttype:any='LineChart'
+  ArrayFromGraphData:any=[]
+  charTitle:any="Weekly views"
+  myOptions = {
+    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+    is3D: true
+  }
   //GraphData:any
   UserId=JSON.parse(localStorage.getItem('User'))
 
   constructor(private MyBlogServices:ConfigService) { }
+  
 
   ngOnInit(): void {
     var myBlogData=new IEMyBlog()
@@ -49,39 +59,52 @@ export class MyblogComponent implements OnInit {
     console.log(e)
     this.showGraph=true
     this.GraphBlogId=e
-    this.Week=this.GraphBlogId
+    this.Week=[...this.GraphBlogId]
     console.log(this.Week)
 
     this.Week.forEach((d:any)=>{
       d.dateObj =  moment(d.dateonview);  
     });
   
+    function  buildData(data:any, keyName:any ){
+        let result:Array<object>=[]
+        _.forEach(data, (val, key)=>{
+          //key is week ,month or year depend upon method
+        // console.log("val",val,"length",val.length)
+          //console.log("key",key) 
+          console.log("type of result ",typeof(result))
+          result.push({[keyName]:key, count:val.length})
+        })
+        return result;
+    }
 
- function   buildData(data:any, keyName:any ){
-    let result:any
-    _.forEach(data, (val, key)=>{
-      //key is week ,month or year depend upon method
-     // console.log("val",val,"length",val.length)
-      //console.log("key",key) 
-      result.push({[keyName]:key, count:val.length})
-    })
-    return result;
-  }
+ 
 
-  //console.log()
+    function  groupAndBuild(data:any, dateMethod:any , groupKey:any) {
+        let groupedData = _.groupBy(data, (d)=>{
+          return d.dateObj[dateMethod]()
+        })
+        //let GraphData:any
+          console.log(buildData(groupedData, groupKey))
+        GraphData=[...buildData(groupedData, groupKey)]
+        return buildData(groupedData, groupKey)
+    }
 
- function  groupAndBuild(data:any, dateMethod:any , groupKey:any) {
-    let groupedData = _.groupBy(data, (d)=>{
-      return d.dateObj[dateMethod]()
-    })
-    //let GraphData:any
-      console.log(buildData(groupedData, groupKey))
-    GraphData=[...buildData(groupedData, groupKey)]
-    return buildData(groupedData, groupKey)
-  }
-
-  //console.log(GraphData)
+    console.log(groupAndBuild(this.Week,'week','week'))
+    console.log(GraphData)
   
+   
+  const that = this;
+  GraphData.forEach(ConverToGraph)
+  function ConverToGraph(item:any,index:any)
+  {
+    that.ArrayFromGraphData[index]= Object.values(GraphData[index])
+  }
 
-  } 
+  console.log(that.ArrayFromGraphData)
+
+  this.chartColumns = ['Week', 'Views']
+  
+  }
+
 }

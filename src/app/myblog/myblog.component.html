@@ -1,6 +1,7 @@
 <div id="MyBlogDiv" *ngIf="LoadApi==true" class="container">
-    <div id="GraphStats" *ngIf="showGraph==true">
-        
+    <div #GrphDiv id="GraphStats" *ngIf="showGraph==true" >
+        <google-chart [title]="charTitle"  [type]="charttype" [data]="ArrayFromGraphData" [columns]="chartColumns" [options]="myOptions" >
+        </google-chart>
     </div>
     <div class="row">
         <div id="MyBlogDivSingle"  *ngFor="let myblog of MyBlogs.data" class="col-md-12" >

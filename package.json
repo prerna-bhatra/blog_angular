@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~11.1.0",
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/router": "~11.1.0",
+    "angular-google-charts": "^2.0.1",
     "clientjs": "^0.1.11",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",

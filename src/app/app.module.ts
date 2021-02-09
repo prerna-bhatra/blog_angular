@@ -15,7 +15,8 @@ import { ConfigComponent } from './config/config.component';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
 import { ReadblogComponent } from './readblog/readblog.component';
 import { MyblogComponent } from './myblog/myblog.component';
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+// import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    Ng2GoogleChartsModule
+    GoogleChartsModule,
+    // Ng2GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
