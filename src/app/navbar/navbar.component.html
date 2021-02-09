@@ -27,7 +27,7 @@
         </ul>
         <ul *ngIf=" isUserLoggedIn===true"  class="nav navbar-nav navbar-right">
           <li><a routerLink="/write" routerLinkActive="active" > Write</a></li>
-          <li><a href="#">Draft</a></li>
+          <li><a routerLink="/drafts" routerLinkActive="active">Draft</a></li>
           <li><a routerLink="/stories" routerLinkActive="active">My Blogs</a></li>
           <li><button (click)="SignOutClick()" class="btn btn-danger">Sign Out</button></li>   
         </ul>

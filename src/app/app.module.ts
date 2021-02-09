@@ -17,6 +17,7 @@ import { ReadblogComponent } from './readblog/readblog.component';
 import { MyblogComponent } from './myblog/myblog.component';
 // import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { DraftComponent } from './draft/draft.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ConfigComponent,
     WriteBlogComponent,
     ReadblogComponent,
-    MyblogComponent
+    MyblogComponent,
+    DraftComponent
   ],
   imports: [
     BrowserModule,

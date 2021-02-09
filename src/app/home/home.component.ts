@@ -91,10 +91,10 @@ export class HomeComponent implements OnInit {
       if(result.data.length==0)
       {
         setTimeout(function(){
-         alert("data not found");
+        // alert("data not found");
         //// that.noDataFound=true
        // that.LoadSearchApi=false
-           },5000);
+           },10000);
       }
 
     //  console.log(that.noDataFound)

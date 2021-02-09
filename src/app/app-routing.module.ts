@@ -9,6 +9,7 @@ import {NavbarComponent} from './navbar/navbar.component'
 import {WriteBlogComponent} from './write-blog/write-blog.component'
 import {ReadblogComponent} from './readblog/readblog.component'
 import {MyblogComponent} from './myblog/myblog.component'
+import {DraftComponent} from './draft/draft.component'
 const routes: Routes = [
   {path:'',component:HomeComponent},
   { path: 'login', component: LoginFormComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'read/:blogId',component:ReadblogComponent},
   {path:'nav',component:NavbarComponent},
   {path:'stories',component:MyblogComponent},
+  {path:'drafts',component:DraftComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
 
