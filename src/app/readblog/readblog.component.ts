@@ -22,6 +22,7 @@ export class ReadblogComponent implements OnInit {
   TopPos:any
   LeftPos:any
   showChildComponent:any=false
+  showVar:any=this.showChildComponent
 
   constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient,private BlogImgService:ConfigService) { }
 
@@ -130,10 +131,7 @@ export class ReadblogComponent implements OnInit {
         // console.log("after",  this.showChildComponent)
     }
 
-    CloseCommentComponent()
-    {
-      this.showChildComponent=false
-    }
+  
 }
 
 

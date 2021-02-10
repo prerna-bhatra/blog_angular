@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input } from '@angular/core';
 
 @Component({
   selector: 'app-comment',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
+  @Input('showVar') showVar: any;
   constructor() { }
 
   ngOnInit(): void {
+    console.log("show comp",this.showVar)
   }
+
+  CloseCommentComponent()
+  {
+    console.log("close comment comp before update",this.showVar)
+    this.showVar=false
+    console.log("after update")
+    console.log("varible update",this.showVar)
+  }
+
 
 }
