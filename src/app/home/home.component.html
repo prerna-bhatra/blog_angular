@@ -13,21 +13,19 @@
 </div>
 <div class="container">
    <div class="col-md-3">
-      <input  id="SearchInput"  placeholder="filter by tag name" class="form-control" (keyup)="SearchTag($event)">   
+      <!-- (keyup)="SearchTag($event)" -->
+      <!--    (keyup.enter)="SearchByEnter($event)" -->
+      <input placeholder="Filter By Tag Name" (keyup)="SearchTag($event)" >   
    </div>
 </div>
 
-<div class="container row" id="BlogsArea" >
-   <div *ngIf="Searching==true " id="SearchDivArea">
-      <h6 *ngIf="LoadSearchApi===false">
-         searching...
-      </h6>
+<div class="container row" id="BlogsArea"  *ngIf="SearchOnEnter==false">
+   <div *ngIf="Searching" id="SearchDivArea">
       <div *ngFor="let Searcheditem of SearchedData">
         <a [routerLink]="['/read',Searcheditem._id]" routerLinkActive="active">
          <h4><b>{{Searcheditem.BlogHeading}}</b></h4>
         </a>
       </div>
-     
    </div>
     <div class="col-md-12">
        <h4><b>TRENDING ON VCOMPLY</b></h4>
@@ -61,7 +59,7 @@
             <div *ngFor="let restblog of RestBlogs" class="col-md-4 "  id="BlogDiv">
                <a href="#"><h5>Published By <i>{{restblog.UserName}}</i></h5></a>
                <br/>
-               <a    [routerLink]="['/read',restblog._id]" routerLinkActive="active">
+               <a [routerLink]="['/read',restblog._id]" routerLinkActive="active">
                  
                   <h4><b>{{restblog.BlogHeading}}</b></h4>
 
@@ -73,6 +71,20 @@
     </div>
 </div>
 
+<div *ngIf="SearchOnEnter" class="container" id="SearchEnterDiv">  
+   <div *ngIf="noDataFound==true">
+      <h4 class="text text-danger">Sorry, no results found ! </h4>
+      <img  src="assets/images/datanotfound.gif">
+   </div>
 
+   <div *ngIf="noDataFound==false">
+         <!-- DATA -->
+         <div *ngFor="let Searcheditem of SearchedData">
+            <a [routerLink]="['/read',Searcheditem._id]" routerLinkActive="active">
+             <h4><b>{{Searcheditem.BlogHeading}}</b></h4>
+            </a>
+          </div>
+   </div>
+</div>
 
 </div>

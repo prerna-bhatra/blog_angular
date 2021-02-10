@@ -19,85 +19,116 @@ export class HomeComponent implements OnInit {
   LoadSearchApi:boolean=false
   SearchingTag:any
   SearchedData:any
-  noDataFound:Boolean=false
-  constructor(private http:HttpClient,private trendService:ConfigService,private NewBlogService:ConfigService,private RestBlogService:ConfigService,private SearchService:ConfigService) { }
+  noDataFound:Boolean
+  SearchOnEnter:Boolean=false
+  SearchedDataonEnter:any
+  constructor(private http:HttpClient,private service:ConfigService) { }
 
   ngOnInit(): void {
-      this.trendService.FetchTrendingBlogs()
-      .subscribe((TrendBlogData=>
-        {
-          // this.TrendingBlogs=TrendBlogData
-          // console.log("from service data", this.blogsTrend)
-          this.FetchTrndBlogs(TrendBlogData)
-        }))
+      this.service.FetchTrendingBlogs().subscribe((data: any)=>
+      {
+        this.TrendingBlogs = data.result; 
+      });
 
+      this.service.FetchNewBlogs().subscribe((data: any)=>
+      {
+        this.NewBlogs = data.result;
+      });     
 
-        this.NewBlogService.FetchNewBlogs()
-        .subscribe((NewBlogData=>
-          {
-            console.log(NewBlogData)
-           this.FetchNewBlogs(NewBlogData)
-          }))
-          
-
-          this.RestBlogService.FetchRestBlogs()
-          .subscribe((RestBlogData=>
-            {
-              console.log(RestBlogData)
-             this.FetchRestBlogs(RestBlogData)
-            }))
-  
-  }
-
-  FetchTrndBlogs(TrendBlogData:any)
-  {
-    this.TrendingBlogs=TrendBlogData.result
-   // console.log("TrendingBlog",this.TrendingBlogs.result)
-  }
-
-  FetchNewBlogs(NewBlogData:any)
-  {
-    this.NewBlogs=NewBlogData.result
-  }
-
-  FetchRestBlogs(RestBlogData:any)
-  {
-    this.RestBlogs=RestBlogData.result
+      this.service.FetchRestBlogs()
+      .subscribe((data: any) =>
+      {
+        this.RestBlogs = data.result;
+      });
   }
   
-  
-
   SearchTag($event:any)
   {
+    this.SearchedData=''
     let SendingData:IEsearchitem = {searchValue: ''};
    this.Searching=true
    let searchData = $event.target.value
-   console.log(searchData);
+   console.log("input val",searchData);
+   console.log("event keycode",$event.key)
+   if(searchData.trim()=='')
+   {
+     console.log("search input is blank")
+     this.Searching=false 
+   }
    SendingData.searchValue=$event.target.value;
    console.log("search item",SendingData.searchValue)
-    this.SearchService.SearchByTag(SendingData).pipe(
+    this.service.SearchByTag(SendingData).pipe(
        debounceTime(5000)
-
       // If previous query is diffent from current   
       , distinctUntilChanged()
-
       // subscription for response
     )
     .subscribe(result=>{
+      console.log('RRRRRRRRRRRR', result);
       const that = this; 
-      this.LoadSearchApi=true
-      this.SearchedData=result.data
-      console.log(result)
+      if($event.key!='Enter')
+      {
+        console.log("result before enter",result)
+        console.log("ohho")
+        this.SearchedData=result.data
+        console.log("PLEASE")
+        console.log("store data", this.SearchedData)
+        this.LoadSearchApi=true
+        that.Searching=true 
+        console.log("store data 2", this.SearchedData)
+        
+        console.log(result,"search result",this.SearchedData)
+      }
+      else if($event.key=='Enter')
+      { 
+        this.SearchOnEnter = true;
+        this.SearchedData = result.data;
+        console.log("search enter and result",this.SearchedData)
+        if(this.SearchedData.length==0)
+        {
+          this.noDataFound=true
+        }
+        else{
+          this.noDataFound=false
+          
+        }
+        // console.log()
+        
+      }
+    },
+    err=>{
+      console.log(err)
+    })
+  }
+
+
+  SearchByEnter($event:any)
+  {
+    console.log('PASSS');
+    let SendingData:IEsearchitem = {searchValue: ''};
+    let searchData = $event.target.value;
+    console.log(searchData);
+    if(searchData.trim() === '')
+    {
+      this.SearchOnEnter = false; 
+    } else {
+      this.SearchOnEnter = true;
+    }
+    SendingData.searchValue=$event.target.value;
+    // console.log("search item",SendingData.searchValue)
+    this.service.SearchByTag(SendingData).subscribe(result => {
       if(result.data.length==0)
       {
-        setTimeout(function(){
-        // alert("data not found");
-        //// that.noDataFound=true
-       // that.LoadSearchApi=false
-           },10000);
+        this.noDataFound = true;
+      } else {
+        console.log('HEHEYE');
+        console.log("result on enter",result.data)
+        console.log("HEY WHY ARE YOU NOT GETTING COPIED")
+        this.SearchedDataonEnter=result.data
+        console.log("after assgin")
+        console.log("searched data",this.SearchedDataonEnter)
+        this.noDataFound=false
       }
-
-    //  console.log(that.noDataFound)
     },
     err=>{
       console.log(err)

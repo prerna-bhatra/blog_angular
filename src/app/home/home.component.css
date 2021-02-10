@@ -47,12 +47,20 @@
 #SearchDivArea
 {
     padding: 20px 20px 20px 20px;
-    border: 1px solid gray;
     width: 300px;
     z-index: 999;
+    /* box-shadow: 10px 10px 10px 10px; */
 }
 
+#SearchEnterDiv
+{
+    margin-top: 10px;
+    
+}
 
+/* #SearchEnterDiv img{
+    
+} */
 /* @keyframes rotation {
     from {
       transform: rotate(0deg);
