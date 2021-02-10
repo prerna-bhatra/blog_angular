@@ -65,16 +65,17 @@ export class HomeComponent implements OnInit {
     )
     .subscribe(result=>{
       console.log('RRRRRRRRRRRR', result);
-      const that = this; 
+     
       if($event.key!='Enter')
       {
+        this.SearchOnEnter=false
         console.log("result before enter",result)
         console.log("ohho")
         this.SearchedData=result.data
         console.log("PLEASE")
         console.log("store data", this.SearchedData)
         this.LoadSearchApi=true
-        that.Searching=true 
+        this.Searching=true 
         console.log("store data 2", this.SearchedData)
         
         console.log(result,"search result",this.SearchedData)
