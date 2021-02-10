@@ -25,7 +25,7 @@
     <div id="TextSelectedButton"  *ngIf="ShowButtonsOnSelection==true" [style.left.px]="LeftPos-100" [style.top.px]="TopPos-100">
             <ul>
                 <li><button (click)="shareTwitter()" ><i class="fab fa-twitter"></i></button></li>
-                <li><button><i class="fa fa-comment"></i></button></li>
+                <li><button (click)="ClickCommentComp()"><i class="fa fa-comment"></i></button></li>
             </ul>
     </div>
 
@@ -35,3 +35,5 @@
 <div id="MaxLimitDiv" *ngIf="maxLimit==true">
     <h1 class="text text-danger">{{BlogData}}</h1>
 </div>
+
+<app-comment id="CommentComp" *ngIf="showChildComponent==true"></app-comment>

@@ -21,6 +21,7 @@ export class ReadblogComponent implements OnInit {
   ShowButtonsOnSelection:boolean
   TopPos:any
   LeftPos:any
+  showChildComponent:any=false
 
   constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient,private BlogImgService:ConfigService) { }
 
@@ -121,6 +122,18 @@ export class ReadblogComponent implements OnInit {
     }
     }
 
+
+    ClickCommentComp()
+    {
+      // console.log("click befor",  this.showChildComponent)
+        this.showChildComponent=true
+        // console.log("after",  this.showChildComponent)
+    }
+
+    CloseCommentComponent()
+    {
+      this.showChildComponent=false
+    }
 }
 
 
