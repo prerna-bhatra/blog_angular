@@ -1,10 +1,42 @@
 #ReadBlogDiv{
     margin-top: 50px;
+    position: relative;
 }
 #ImageDiv img{
     width: 50%;
 }
 #MaxLimitDiv
 {
+  
     margin-top: 60px;
 }
+
+#TextSelectedButton
+{
+    padding: 4px 4px 4px 4px;
+    background-color: black;
+    position: absolute;
+    border-radius: 20%;
+    
+}
+
+#TextSelectedButton ul{
+    list-style: none;
+}
+#TextSelectedButton ul li{
+    display: inline;
+    margin-right: 5px;
+}
+#TextSelectedButton button
+{
+    background-color: black;
+    color: white;
+    border: none;
+    
+}
+
+
+
+
+
+

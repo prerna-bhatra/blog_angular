@@ -16,6 +16,12 @@ export class ReadblogComponent implements OnInit {
   animal:any
   BlogImg:any
   maxLimit:boolean=false
+
+  selectedText: string = '';
+  ShowButtonsOnSelection:boolean
+  TopPos:any
+  LeftPos:any
+
   constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient,private BlogImgService:ConfigService) { }
 
   ngOnInit(): void {
@@ -77,6 +83,43 @@ export class ReadblogComponent implements OnInit {
   {
     window.speechSynthesis.cancel();
   }
+
+
+  //get range of selcted text
+  showSelectedText(e:any) {
+    var text = "";
+    if (window.getSelection) {
+      text = window.getSelection().toString();
+      if(text!='')
+      {
+        console.log("selcted text 2",text)
+      this.ShowButtonsOnSelection=true
+      console.log("mouse x",e.clientX);
+      console.log(e.clientY);
+      this.TopPos=e.clientY
+      this.LeftPos=e.clientX 
+        console.log(window.getSelection().getRangeAt(0))
+      }
+      if(text=='')
+      {
+        this.ShowButtonsOnSelection=false
+      }
+      
+
+    }
+    this.selectedText = text;
+
+   // console.log(this.selectedText)
+  }
+
+    shareTwitter()
+    {
+    const selectedText =  this.selectedText
+    console.log("twitter",selectedText)
+    if (selectedText != "") {
+      window.open('https://twitter.com/intent/tweet?text='+encodeURI(selectedText) + '&url=' + encodeURI(document.URL));
+    }
+    }
 
 }
 
