@@ -22,6 +22,11 @@ export class HomeComponent implements OnInit {
   noDataFound:Boolean
   SearchOnEnter:Boolean=false
   SearchedDataonEnter:any
+  ImgUrl:any=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/`
+  //fetch all images 
+  TrendingBlogImgsArr:any=[]
+  NewBlogImgArr:any=[]
+  MoreBlogImgAr:any=[]
   constructor(private http:HttpClient,private service:ConfigService) { }
 
   ngOnInit(): void {
@@ -64,7 +69,7 @@ export class HomeComponent implements OnInit {
       // subscription for response
     )
     .subscribe(result=>{
-      console.log('RRRRRRRRRRRR', result);
+      // console.log('RRRRRRRRRRRR', result);
      
       if($event.key!='Enter')
       {

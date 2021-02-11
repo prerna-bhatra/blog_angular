@@ -31,6 +31,7 @@
        <h4><b>TRENDING ON VCOMPLY</b></h4>
        <div class="row">
             <div *ngFor="let trendblog of TrendingBlogs" class="col-md-4 "   id="BlogDiv">
+                <img [src]="ImgUrl+trendblog._id">
                <a href="#"><h5>Published By <i>{{trendblog.UserName}}</i></h5></a>
                <a [routerLink]="['/read',trendblog._id]" routerLinkActive="active">
                   <h4><b>{{trendblog.BlogHeading}}</b></h4>
@@ -44,6 +45,7 @@
       <h4><b>NEW ON VCOMPLY</b></h4>
        <div class="row">
             <div *ngFor="let NewBlog of NewBlogs" class="col-md-4 "   id="BlogDiv">
+               <img [src]="ImgUrl+NewBlog._id">
                <a href="#"><h5>Published By <i>{{NewBlog.UserName}}</i></h5></a>
                <a  [routerLink]="['/read',NewBlog._id]" routerLinkActive="active">
                <h4><b>{{NewBlog.BlogHeading}}</b></h4>
@@ -57,6 +59,7 @@
       <h4><b>MORE BLOGS FOR YOU</b></h4>
        <div class="row">
             <div *ngFor="let restblog of RestBlogs" class="col-md-4 "  id="BlogDiv">
+               <img [src]="ImgUrl+restblog._id">
                <a href="#"><h5>Published By <i>{{restblog.UserName}}</i></h5></a>
                <br/>
                <a [routerLink]="['/read',restblog._id]" routerLinkActive="active">
@@ -80,6 +83,7 @@
    <div *ngIf="noDataFound==false">
          <!-- DATA -->
          <div *ngFor="let Searcheditem of SearchedData">
+           
             <a [routerLink]="['/read',Searcheditem._id]" routerLinkActive="active">
              <h4><b>{{Searcheditem.BlogHeading}}</b></h4>
             </a>
