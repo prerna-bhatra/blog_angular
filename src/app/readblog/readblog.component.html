@@ -36,11 +36,14 @@
     </div>
 
     <div *ngIf="ShowAllComments==true">
-        All Comments
+       
     </div>
 
-    <div *ngIf="ShowMycomments==true">
-        My Comments
+    <div  *ngIf="ShowMycomments==true">
+        <div *ngFor="let mycomments of  MyComments">
+            {{mycomments.CommentName}}
+        </div>
+       <!--  -->
     </div>
 
 </div>
