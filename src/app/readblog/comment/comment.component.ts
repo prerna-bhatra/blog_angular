@@ -2,6 +2,7 @@ import { Component, OnInit ,Input,EventEmitter, Output } from '@angular/core';
 import {IEcomment}  from './comment'
 import {ConfigService} from '../../config.service'
 import { ActivatedRoute ,Params,Router } from "@angular/router";
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-comment',
@@ -20,9 +21,29 @@ export class CommentComponent implements OnInit {
   commentName:any
   SaveMode:any
   BlogId:any
+  Token:any
+  decoded:any
+
   constructor(private service:ConfigService,private router:ActivatedRoute,private route:Router) { }
 
+   checkLogin()
+  {
+   console.log("login check")
+     if(!localStorage.getItem('User'))
+     {
+       
+      alert("please login to comment ")
+       this.route.navigate(['/login'])
+     
+     }
+     else{
+      this.Token=JSON.parse(localStorage.getItem('User'))
+      this.decoded=jwt_decode(this.Token);
+     }
+  }
+
   ngOnInit(): void {
+    this.checkLogin()
     console.log("show comp",this.showVar)
     console.log("selcted text",this.selectedTextInChild)
     console.log("offsets",this.EndOffsetInChild,this.StartOffsetInChild)
@@ -58,7 +79,7 @@ export class CommentComponent implements OnInit {
     CommentData.HighlightTextRangeStartOffest=this.StartOffsetInChild
     CommentData.HighlightTextYcordinator=this.Ycoordinator
     CommentData.BlogId= this.BlogId
-    console.log("BlogId", CommentData.BlogId)
+    // console.log("BlogId", CommentData.BlogId)
     if(CommentData.CommentName===undefined ||  CommentData.CommentPrivacy===undefined)
     {
       alert("empty comment can not be created")
@@ -67,15 +88,18 @@ export class CommentComponent implements OnInit {
       this.service.PublishComment(CommentData)
       .subscribe(res=>
         {
-          console.log("result",res)
+          // console.log("result",res)
+          alert("comment created successfully")
+          
         },
         err=>{
-          console.log(err)
+          // console.log(err)
+          alert("comment not created ")
         })
 
     }
 
-    console.log("Comment Data",CommentData)
+    // console.log("Comment Data",CommentData)
     
   }
 }

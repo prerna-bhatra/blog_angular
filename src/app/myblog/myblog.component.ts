@@ -14,6 +14,7 @@ let  GraphData:any
 })
 export class MyblogComponent implements OnInit {
   
+  NoDataFound:any=false
   MyBlogs:any
   GraphBlogId:any
   LoadApi:boolean=false
@@ -39,8 +40,17 @@ export class MyblogComponent implements OnInit {
     .subscribe(result=>{
       console.log(result)
       this.FetchMyBlogs(result)
+      console.log(this.MyBlogs.data)
+      if(this.MyBlogs.data.length==0)
+      {
+        this.NoDataFound=true
+        console.log("no data found",this.NoDataFound)
+      }
+      
+      
       this.LoadApi=true
-      console.log(this.LoadApi)
+
+      // console.log(this.LoadApi)
       //myBlogData=result.data
     },
     err=>{
