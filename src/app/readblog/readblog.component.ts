@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit ,AfterViewInit, ElementRef,ViewChild} from '@angular/core';
 import { ActivatedRoute ,Params,Router } from "@angular/router";
 import {ConfigService} from '../config.service'
-import {IEreadblogvalue} from './readblog'
+import {IEreadblogvalue,IEallComments,IEmyComments} from './readblog'
+
 
 
 @Component({
@@ -25,8 +26,13 @@ export class ReadblogComponent implements OnInit {
   showVar:any=this.showChildComponent
   StartOffset:any
   EndOffset:any
-
-  constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient) { }
+  MyCommentButton:any
+  ShowAllComments:any
+  ShowMycomments:any
+  AllComments:any
+  MyComments:any
+  
+  constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.router.paramMap
@@ -36,17 +42,49 @@ export class ReadblogComponent implements OnInit {
         blogParam.BlogId=paramas.get('blogId')
         console.log( blogParam.BlogId)
 
-        this.ReadBlogService.ReadBlog(blogParam.BlogId)
+        this.Service.ReadBlog(blogParam.BlogId)
         .subscribe(result=>{
           
           console.log("result ",result)
           if(result.data){
             this.BlogData=result.data
             console.log( this.maxLimit)
+            this.Service.ReadAllComments(blogParam.BlogId)
+            .subscribe(CommenResult=>
+              {
+                console.log("All Comments",CommenResult)
+                this.AllComments=CommenResult
+                console.log("saved comments",this.AllComments)
+              },
+              err=>
+              {
+                console.log("error",err)
+              })
+
+
+              //Fetch My Comments
+              if(this.MyCommentButton===true)
+              {
+                this.Service.ReadMyComments(blogParam.BlogId)
+                .subscribe(CommenResult=>
+                  {
+                    console.log("My Comments",CommenResult)
+                    this.MyComments=CommenResult
+                  },
+                  err=>
+                  {
+                    console.log("error",err)
+                  })
+              }
+
           }
           else if(result.Login){
               this.maxLimit=true
               this.BlogData=result.Login
+
+
+
+              // var CommentParam=new IEallComments()              
              // console.log( this.maxLimit)
               //alert(result.Login)
            // this.route.navigate(['/login'])
@@ -64,6 +102,20 @@ export class ReadblogComponent implements OnInit {
         })
       })
 
+      this.CheckLogin()
+
+  }
+
+
+  CheckLogin()
+  {
+    if(window.localStorage.getItem('User'))
+    {
+      this.MyCommentButton=true
+    }
+    else{
+      this.MyCommentButton=false
+    }
   }
 
   listen()
@@ -144,6 +196,23 @@ export class ReadblogComponent implements OnInit {
       //for closing twitter and comment buttons 
       this.ShowButtonsOnSelection=false
   }  
+
+
+      ShowAllcomments()
+      {
+        this.ShowAllComments=true
+        this.ShowMycomments=false
+
+        console.log("all",this.ShowAllComments,'my',this.ShowMycomments)
+
+      }
+      
+      ShowMyComments()
+      {
+        this.ShowAllComments=false
+        this.ShowMycomments=true
+        console.log("all",this.ShowAllComments,'my',this.ShowMycomments)
+      }
 
   
 }

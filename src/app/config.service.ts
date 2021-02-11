@@ -108,6 +108,18 @@ export class ConfigService {
     this.getToken()
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/${this.decoded.payLoad._id}`,CommentData)
   }
+  
+  ReadAllComments(blogId:IEreadblogvalue):Observable<any>{
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/comments/${blogId}`,{})
+  }
+
+  ReadMyComments(blogId:IEreadblogvalue):Observable<any>{
+    this.getToken()
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/MyComments/${this.decoded.payLoad._id}/${blogId}`,{})
+  }
+
+  
+
 
 
   

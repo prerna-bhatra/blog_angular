@@ -90,6 +90,7 @@ export class CommentComponent implements OnInit {
         {
           // console.log("result",res)
           alert("comment created successfully")
+          this.showvarUpdate.emit(false);
           
         },
         err=>{

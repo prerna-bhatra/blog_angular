@@ -3,7 +3,8 @@
     position: relative;
 }
 #ImageDiv img{
-    width: 50%;
+    width:30%;
+    /* height: 20%; */
 }
 #MaxLimitDiv
 {

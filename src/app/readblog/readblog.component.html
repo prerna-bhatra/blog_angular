@@ -30,6 +30,19 @@
     </div>
 
 
+    <div class="ShowCommentsButton">
+        <button class="btn btn-success" (click)="ShowAllcomments()"> Comments {{AllComments.length}}</button>
+        <button class="btn btn-success"   (click)="ShowMyComments()" *ngIf="MyCommentButton==true">My Comments  {{MyComments.length}}</button>
+    </div>
+
+    <div *ngIf="ShowAllComments==true">
+        All Comments
+    </div>
+
+    <div *ngIf="ShowMycomments==true">
+        My Comments
+    </div>
+
 </div>
 
 <div id="MaxLimitDiv" *ngIf="maxLimit==true">
