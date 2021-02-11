@@ -5,6 +5,7 @@ import {ConfigService} from '../config.service'
 import { HttpClient } from '@angular/common/http';
 import { IEBlog } from './writeblog';
 import { fromEventPattern } from 'rxjs';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -14,16 +15,15 @@ import { fromEventPattern } from 'rxjs';
 })
 export class WriteBlogComponent implements OnInit {
 
-  userData=JSON.parse(localStorage.getItem('User'))
+ 
    data = new FormData();
   constructor(private router:Router,private WriteBlogService:ConfigService,private http: HttpClient) { 
   //console.log(this.userId.user)
   }
 
-  
-
-
   HashTagsArr:any
+  Token:any
+  decoded:any
 
   ngOnInit(): void {
     this.checkLogin()
@@ -39,6 +39,8 @@ export class WriteBlogComponent implements OnInit {
      }
      else{
 
+      this.Token=JSON.parse(localStorage.getItem('User'))
+      this.decoded=jwt_decode(this.Token);
      }
   }
 
@@ -87,7 +89,10 @@ export class WriteBlogComponent implements OnInit {
 
   submitBlog()
   {
-   //console.log(this.form.value.HashTag)
+    console.log("decode",this.decoded.payLoad._id)
+    let UserId=this.decoded.payLoad._id
+    let  UserName=this.decoded.payLoad.name
+   console.log(this.form.value.HashTag)
    this.HashTagsArr=[...this.form.value.HashTag.split("#")]
 
    //console.log(this.form.get('fileSource').value)
@@ -95,13 +100,12 @@ export class WriteBlogComponent implements OnInit {
    this.data.append('BlogImg',this.form.get('fileSource').value)
    this.data.append('BlogHeading',this.form.value.Heading)
    this.data.append('BlogContent',this.form.value.Content)
-    this.data.append('UserId',this.userData.user._id)
-    this.data.append('UserName',this.userData.user.name)
+    this.data.append('UserId',UserId)
+    this.data.append('UserName',UserName)
     this.data.append('hashTags',this.HashTagsArr)
     this.data.append('SaveMode',this.form.value.SaveMode)
     console.log("formdata",this.data)
    
-
     this.WriteBlogService.WriteBlog(this.data)
     .subscribe(result=>{
       //console.log("success",result,typeof(result))
@@ -114,7 +118,5 @@ export class WriteBlogComponent implements OnInit {
     },
     ()=>console.log("request finish")
     )
-   }  
-
-
+  }  
 }

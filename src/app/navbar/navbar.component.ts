@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("NAVBAR")
     this.checkLogin()
     
   }
@@ -32,12 +33,13 @@ export class NavbarComponent implements OnInit {
      {
       this.isUserLoggedIn=true
       
-      //this.router.navigate([NavbarComponent]);
+     
       
      }
      else{
        this.isUserLoggedIn=false
        console.log("hello")
+       this.router.navigate(['/login']);
      }
   }
 

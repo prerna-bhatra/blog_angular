@@ -23,8 +23,10 @@ export class ReadblogComponent implements OnInit {
   LeftPos:any
   showChildComponent:any=false
   showVar:any=this.showChildComponent
+  StartOffset:any
+  EndOffset:any
 
-  constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient,private BlogImgService:ConfigService) { }
+  constructor(private router:ActivatedRoute,private route:Router , private ReadBlogService:ConfigService,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.router.paramMap
@@ -101,6 +103,10 @@ export class ReadblogComponent implements OnInit {
       this.TopPos=e.clientY
       this.LeftPos=e.clientX 
         console.log(window.getSelection().getRangeAt(0))
+        this.StartOffset=window.getSelection().getRangeAt(0).startOffset
+        this.EndOffset=window.getSelection().getRangeAt(0).endOffset
+
+        console.log("offsets",this.StartOffset,this.EndOffset)
       }
       if(text=='')
       {
@@ -130,6 +136,14 @@ export class ReadblogComponent implements OnInit {
         this.showChildComponent=true
         // console.log("after",  this.showChildComponent)
     }
+
+    //for closind the comment comp
+    getUpdatedvalue($event:any) {  
+      console.log($event);  
+      this.showChildComponent = $event; 
+      //for closing twitter and comment buttons 
+      this.ShowButtonsOnSelection=false
+  }  
 
   
 }

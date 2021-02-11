@@ -8,7 +8,9 @@ import {IESignup} from '../signup-form/signup'
 import {IEBlog} from './write-blog/writeblog'
 import {IEreadblogvalue} from './readblog/readblog'
 import {IEMyBlog} from './myblog/myblog'
+import {IEcomment} from './readblog/comment/comment'
 import { BehaviorSubject } from 'rxjs';
+import jwt_decode from 'jwt-decode';
 
 
 //import { fingerprint } from '@angular/compiler/src/i18n/digest';
@@ -22,10 +24,29 @@ export class ConfigService {
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   fingerprint:any= new ClientJS().getFingerprint()
-  UserId=JSON.parse(localStorage.getItem('User'))
+  Token:any
+  decoded :any;
+  //jwt_decode(this.Token);
+  UserId:any
 
   constructor(private http: HttpClient) { }
   configUrl = 'assets/config.json';
+  
+
+  getToken()
+  {
+    if(!localStorage.getItem('User'))
+     {
+       
+      
+     }
+     else{
+
+      this.Token=JSON.parse(localStorage.getItem('User'))
+      this.decoded=jwt_decode(this.Token);
+      console.log("service",this.decoded)
+     }
+  }
   
     
   FetchTrendingBlogs(): Observable<IEtrendingBlogs[]>{
@@ -57,20 +78,23 @@ export class ConfigService {
 
 
   WriteBlog(FormData:IEBlog):Observable<any>{
-    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/blog/${this.UserId.user._id}`,FormData)
+    this.getToken()
+    console.log("decode value",this.decoded)
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/blog/${this.decoded.payLoad._id}`,FormData)
   }
 
   ReadBlog(blogId:IEreadblogvalue):Observable<any>{
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/ReadBlog/${blogId}/${this.fingerprint}`,{})
   }
 
-  BlogImg(blogId:IEreadblogvalue):Observable<any>{
-    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${blogId}`)
-  }
+  // BlogImg(blogId:IEreadblogvalue):Observable<any>{
+  //   return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${blogId}`)
+  // }
 
 
   FetchMyBlog(): Observable<IEMyBlog[]>{
-    return this.http.get<IEMyBlog[]>(`https://desolate-sierra-34755.herokuapp.com/api/MyBlogs/${this.UserId.user._id}`)
+    this.getToken()
+    return this.http.get<IEMyBlog[]>(`https://desolate-sierra-34755.herokuapp.com/api/MyBlogs/${this.decoded.payLoad._id}`)
   }
 
 
@@ -78,5 +102,14 @@ export class ConfigService {
     console.log("searchitem in service",SearchItem.searchValue)
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/SearchByHashTag`,{hashtag: SearchItem.searchValue})
   }
+
+  
+  PublishComment(CommentData:IEcomment):Observable<any>{
+    this.getToken()
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/${this.decoded.payLoad._id}`,CommentData)
+  }
+
+
+  
 
 }

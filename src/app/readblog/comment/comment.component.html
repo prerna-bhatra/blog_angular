@@ -2,12 +2,14 @@
     <h3>Create Comment</h3>
     <button (click)="CloseCommentComponent()"  style="float: right;"><i class="fa fa-window-close"></i></button>
     <br/>
-    <input placeholder="Your Comment " class="form-control">
+    <p><mark>{{selectedTextInChild}}</mark></p>
+    <input [(ngModel)]="commentName" placeholder="Your Comment " class="form-control" required="true">
     <br/>
-    <select class="form-control">
+    <label>Save As</label>
+    <select class="form-control" [(ngModel)]="SaveMode" required="true">
         <option value="0">private</option>
         <option value="1">public</option>
     </select>
     <br/>
-    <button  style="float: right;" class="btn btn-success">Publish</button>
+    <button  style="float: right;" class="btn btn-success" (click)="PublishComment($event)">Publish</button>
 </div>  

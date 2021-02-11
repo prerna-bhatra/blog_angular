@@ -6,5 +6,6 @@ export class IEcomment
     HighlightTextYcordinator:any
     HighlightTextRangeEndOffest:any
     CommentPrivacy:any
+    BlogId:any
     
 }

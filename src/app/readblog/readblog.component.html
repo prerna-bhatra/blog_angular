@@ -36,7 +36,21 @@
     <h1 class="text text-danger">{{BlogData}}</h1>
 </div>
 
-<app-comment id="CommentComp" *ngIf="showChildComponent==true" [showVar]="showChildComponent"></app-comment>
+<app-comment id="CommentComp"
+ *ngIf="showChildComponent==true" 
+ [showVar]="showChildComponent" 
+  (showvarUpdate)="getUpdatedvalue($event)" 
+[selectedTextInChild]="selectedText"
+[StartOffsetInChild]="StartOffset"
+[EndOffsetInChild]="EndOffset"
+[Ycoordinator]="TopPos"
+></app-comment>
+
+
+
+
+
+
 
 
 

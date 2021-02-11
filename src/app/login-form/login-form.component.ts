@@ -62,7 +62,7 @@ export class LoginFormComponent implements OnInit {
     this.loginService.login(loginVallue)
     .subscribe(data=>{
       console.log("success",typeof(data))
-     localStorage.setItem('User',JSON.stringify( data));
+     localStorage.setItem('User',JSON.stringify( data.token));
      this.dataSharingService.isUserLoggedIn.next(true)
      //this.router.navigate([NavbarComponent]);
      

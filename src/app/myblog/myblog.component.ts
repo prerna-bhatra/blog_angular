@@ -28,7 +28,7 @@ export class MyblogComponent implements OnInit {
     is3D: true
   }
   //GraphData:any
-  UserId=JSON.parse(localStorage.getItem('User'))
+  // UserId=JSON.parse(localStorage.getItem('User'))
 
   constructor(private MyBlogServices:ConfigService) { }
   
