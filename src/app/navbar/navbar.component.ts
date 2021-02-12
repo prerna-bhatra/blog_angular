@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input,Output} from '@angular/core';
 import {Router} from '@angular/router'
+import {IEsearchitem} from './search/search'
 import {ConfigService} from '../config.service'
+import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -11,9 +13,13 @@ import {ConfigService} from '../config.service'
 export class NavbarComponent implements OnInit {
   LoginCheck:boolean
   isUserLoggedIn: boolean;
+  ShowSearch:boolean=false
+  SearchedData:any
+  SearchOnEnter:any
+  noDataFound:any
 
-  constructor(private router: Router,private SignouService:ConfigService,private dataSharingService:ConfigService) { 
-    this.dataSharingService.isUserLoggedIn.subscribe( value => {
+  constructor(private router: Router,private service:ConfigService) { 
+    this.service.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
   });
 
@@ -46,12 +52,12 @@ export class NavbarComponent implements OnInit {
   SignOutClick()
   {
     console.log("signout")
-    this.SignouService.signout()
+    this.service.signout()
     .subscribe(data=>{
       console.log("success",typeof(data))
      localStorage.removeItem("User");
      alert("successfully sigout ")
-     this.dataSharingService.isUserLoggedIn.next(false)
+     this.service.isUserLoggedIn.next(false)
      this.router.navigate(['/'])
      
     },
@@ -62,5 +68,66 @@ export class NavbarComponent implements OnInit {
     ()=>console.log("request finish")
     )
   }
- 
+
+  showSearchResult($event:any)
+  {
+    this.SearchedData=''
+    let SendingData:IEsearchitem = {searchValue: ''};
+  //  this.Searching=true
+   let searchData = $event.target.value
+   console.log("input val",searchData);
+   console.log("event keycode",$event.key)
+   if(searchData.trim()=='')
+   {
+     console.log("search input is blank")
+    //  this.Searching=false 
+   }
+   SendingData.searchValue=$event.target.value;
+   console.log("search item",SendingData.searchValue)
+    this.service.SearchByTag(SendingData).pipe(
+       debounceTime(5000)
+      // If previous query is diffent from current   
+      , distinctUntilChanged()
+      // subscription for response
+    )
+    .subscribe(result=>{
+      // console.log('RRRRRRRRRRRR', result);
+     
+      if($event.key!='Enter')
+      {
+        this.SearchOnEnter=false
+        console.log("result before enter",result)
+        console.log("ohho")
+        this.SearchedData=result.data
+        console.log("PLEASE")
+        console.log("store data", this.SearchedData)
+        // this.LoadSearchApi=true
+        // this.Searching=true 
+        console.log("store data 2", this.SearchedData)
+        
+        console.log(result,"search result",this.SearchedData)
+      }
+      else if($event.key=='Enter')
+      { 
+        this.SearchOnEnter = true;
+        this.SearchedData = result.data;
+        console.log("search enter and result",this.SearchedData)
+        if(this.SearchedData.length==0)
+        {
+          this.noDataFound=true
+        }
+        else{
+          this.noDataFound=false
+          
+        }
+        // console.log()
+        
+      }
+    },
+    err=>{
+      console.log(err)
+    }) 
+
+
+  }
 }

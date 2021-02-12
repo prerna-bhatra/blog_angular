@@ -48,7 +48,8 @@ export class ReadblogComponent implements OnInit {
           console.log("result ",result)
           if(result.data){
             this.BlogData=result.data
-            console.log( this.maxLimit)
+            console.log("result from api",result.data)
+            // console.log( this.maxLimit)
 
             //my comments length
             this.Service.ReadMyCommentsLn(blogParam.BlogId)

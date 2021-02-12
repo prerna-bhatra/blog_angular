@@ -21,6 +21,7 @@ import { DraftComponent } from './draft/draft.component';
 import { CommentComponent } from './readblog/comment/comment.component';
 import { AllCommentsComponent } from './readblog/all-comments/all-comments.component';
 import { MyCommentsComponent } from './readblog/my-comments/my-comments.component';
+import { SearchComponent } from './navbar/search/search.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MyCommentsComponent } from './readblog/my-comments/my-comments.componen
     DraftComponent,
     CommentComponent,
     AllCommentsComponent,
-    MyCommentsComponent
+    MyCommentsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

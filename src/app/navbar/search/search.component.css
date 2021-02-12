@@ -1,0 +1,12 @@
+#SearchArea
+{
+    background-color: white;
+    width: 195px;
+    position: absolute;
+    left:12.4%;
+    top: 44%;
+}
+#FoundData
+{
+    margin-top: 20px;
+}

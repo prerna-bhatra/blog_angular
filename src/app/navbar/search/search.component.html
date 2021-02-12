@@ -1,0 +1,7 @@
+<div id="SearchArea">
+    <div *ngFor="let Searcheditem of SearchedData" id="FoundData">
+        <a [routerLink]="['/read',Searcheditem._id]" routerLinkActive="active">
+         <h4><b>{{Searcheditem.BlogHeading}}</b></h4>
+        </a>
+      </div>
+</div>
