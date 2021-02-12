@@ -1,3 +1,5 @@
-<div *ngFor="let comment of comments" id="PublicComments" class="container">
-    {{comment?.CommentName}}
+<div  id="PublicComments" class="container">
+    <div *ngFor="let comment of comments" id="comment">
+        {{comment?.CommentName}}
+    </div>
 </div>

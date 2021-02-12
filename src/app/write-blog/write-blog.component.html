@@ -34,6 +34,7 @@
             type="file" 
             class="form-control"
             (change)="onFileChange($event)"
+            accept="image/x-png,image/gif,image/jpeg"
             required>
         <!-- <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
             <div *ngIf="f.file.errors.required">File is required.</div>

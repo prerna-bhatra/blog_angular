@@ -16,7 +16,7 @@
             <h4><i class="fas fa-book-open"></i> {{BlogData?.ViewCount}}</h4>
         </div>
         <div class="col-md-12">
-           <p (mouseup)="showSelectedText($event)">
+           <p (mouseup)="showSelectedText($event)" id="MainPara">
             {{BlogData?.BlogContent}}
            </p> 
         </div>

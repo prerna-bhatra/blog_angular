@@ -17,6 +17,7 @@ export class WriteBlogComponent implements OnInit {
 
  
    data = new FormData();
+   FileName:string=''
   constructor(private router:Router,private WriteBlogService:ConfigService,private http: HttpClient) { 
   //console.log(this.userId.user)
   }
@@ -67,10 +68,23 @@ export class WriteBlogComponent implements OnInit {
   
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.form.patchValue({
-        fileSource: file
-      });
-      console.log(this.form.value.fileSource)
+      this.FileName=file.name
+      console.log(file)
+      if(file.name.includes('png')  || file.name.includes('jpg') || file.name.includes('svg'))
+      {
+        this.form.patchValue({
+          fileSource: file
+        });
+        console.log(this.form.value.fileSource)
+      }
+      else{
+        this.form.patchValue({
+          fileSource: null
+        });
+        console.log(this.form.value.fileSource)
+        alert("only image file allowed")
+      }
+      
     }
 
   }
@@ -89,6 +103,11 @@ export class WriteBlogComponent implements OnInit {
 
   submitBlog()
   {
+
+    // console.log("filename",this.FileName,"type",typeof(this.FileName))
+    if(this.FileName.includes('png')  || this.FileName.includes('jpg') || this.FileName.includes('svg'))
+    {
+      
     console.log("decode",this.decoded.payLoad._id)
     let UserId=this.decoded.payLoad._id
     let  UserName=this.decoded.payLoad.name
@@ -119,4 +138,8 @@ export class WriteBlogComponent implements OnInit {
     ()=>console.log("request finish")
     )
   }  
+  else{
+    alert("Please choose image file only")
+  }
+ }
 }
