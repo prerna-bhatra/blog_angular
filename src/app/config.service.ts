@@ -8,6 +8,7 @@ import {IESignup} from '../signup-form/signup'
 import {IEBlog} from './write-blog/writeblog'
 import {IEreadblogvalue} from './readblog/readblog'
 import {IEMyBlog} from './myblog/myblog'
+import {IEdraft} from './draft/draft'
 import {IEcomment} from './readblog/comment/comment'
 import {IEallComments} from './readblog/all-comments/all-comments'
 import { BehaviorSubject } from 'rxjs';
@@ -126,6 +127,13 @@ export class ConfigService {
     this.getToken()
     return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/MyCommentsLn/${this.decoded.payLoad._id}/${blogId}`,{})
   }
+
+  
+  ReadDraft():Observable<any>{
+    this.getToken()
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/drafts/${this.decoded.payLoad._id}`,{})
+  }  
+
   
 
 }
