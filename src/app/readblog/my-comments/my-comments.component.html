@@ -1,5 +1,6 @@
 <div  id="PublicComments" class="container">
-    <div *ngFor="let comment of comments" id="comment">
+    <div *ngFor="let comment of comments" id="comment"
+    (click)="HighLight(comment?._HighlightTextYcordinator,comment?.HighlightTextRangeStartOffest,comment?.HighlightTextRangeEndOffest)">
         {{comment?.CommentName}}
     </div>
 </div>

@@ -55,12 +55,12 @@ export class AllCommentsComponent implements OnInit {
     const range = document.createRange()
     const mark = document.createElement('mark');
     mark.setAttribute("id","Mark")
-    console.log("mark tag",document.getElementById('Mark'))
-   mark.setAttribute("backgroundColor", "blue");
+    console.log("mark tag",MarkElement,"tagname",mark)
     range.setStart(textNode, s);
     range.setEnd(textNode, e);
+    mark.setAttribute("style", "background-color: yellow;");
     range.surroundContents(mark);
-    mark.setAttribute("backgroundColor", "blue");
+
     }
     else{
       const MainParaEle=document.getElementsByTagName('mark')
@@ -80,14 +80,11 @@ export class AllCommentsComponent implements OnInit {
       const range = document.createRange()
     const mark = document.createElement('mark');
     mark.setAttribute("id","Mark")
-    console.log("mark tag",document.getElementById('Mark'))
-    mark.setAttribute("backgroundColor", "blue");
+    console.log("mark tag",MarkElement,"tagname",mark)
     range.setStart(textNode, s);
     range.setEnd(textNode, e);
+    mark.setAttribute("style", "background-color: yellow;");
     range.surroundContents(mark);
-    mark.setAttribute("backgroundColor", "blue");
-
-
   }
   }
 
