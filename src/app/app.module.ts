@@ -19,6 +19,8 @@ import { MyblogComponent } from './myblog/myblog.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { DraftComponent } from './draft/draft.component';
 import { CommentComponent } from './readblog/comment/comment.component';
+import { AllCommentsComponent } from './readblog/all-comments/all-comments.component';
+import { MyCommentsComponent } from './readblog/my-comments/my-comments.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CommentComponent } from './readblog/comment/comment.component';
     ReadblogComponent,
     MyblogComponent,
     DraftComponent,
-    CommentComponent
+    CommentComponent,
+    AllCommentsComponent,
+    MyCommentsComponent
   ],
   imports: [
     BrowserModule,

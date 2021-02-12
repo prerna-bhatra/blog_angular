@@ -27,10 +27,10 @@ export class ReadblogComponent implements OnInit {
   StartOffset:any
   EndOffset:any
   MyCommentButton:any
-  ShowAllComments:any
-  ShowMycomments:any
+  ShowAllComments:any=false
+  ShowMycomments:any=false
   AllComments:any
-  MyComments:any
+  MyCommentsLength:any
   
   constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService,private http:HttpClient) { }
 
@@ -49,41 +49,26 @@ export class ReadblogComponent implements OnInit {
           if(result.data){
             this.BlogData=result.data
             console.log( this.maxLimit)
-            this.Service.ReadAllComments(blogParam.BlogId)
+
+            //my comments length
+            this.Service.ReadMyCommentsLn(blogParam.BlogId)
             .subscribe(CommenResult=>
               {
-                console.log("All Comments",CommenResult)
-                this.AllComments=CommenResult
-                console.log("saved comments",this.AllComments)
+                console.log("my Comments length",CommenResult)
+                this.MyCommentsLength=CommenResult
+                console.log("lenght comments",this.MyCommentsLength)
               },
               err=>
               {
                 console.log("error",err)
               })
+            
 
-
-              //Fetch My Comments
-              if(this.MyCommentButton===true)
-              {
-                this.Service.ReadMyComments(blogParam.BlogId)
-                .subscribe(CommenResult=>
-                  {
-                    console.log("My Comments",CommenResult)
-                    this.MyComments=CommenResult
-                  },
-                  err=>
-                  {
-                    console.log("error",err)
-                  })
-              }
 
           }
           else if(result.Login){
               this.maxLimit=true
               this.BlogData=result.Login
-
-
-
               // var CommentParam=new IEallComments()              
              // console.log( this.maxLimit)
               //alert(result.Login)
@@ -91,7 +76,7 @@ export class ReadblogComponent implements OnInit {
           }
           
          this.BlogImg=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${blogParam.BlogId}`
-          console.log( this.BlogImg)
+          // console.log( this.BlogImg)
           //console.log( this.BlogData)
 
         },

@@ -31,19 +31,8 @@
 
 
     <div class="ShowCommentsButton">
-        <button class="btn btn-success" (click)="ShowAllcomments()"> Comments {{AllComments.length}}</button>
-        <button class="btn btn-success"   (click)="ShowMyComments()" *ngIf="MyCommentButton==true">My Comments  {{MyComments.length}}</button>
-    </div>
-
-    <div *ngIf="ShowAllComments==true">
-       
-    </div>
-
-    <div  *ngIf="ShowMycomments==true">
-        <div *ngFor="let mycomments of  MyComments">
-            {{mycomments.CommentName}}
-        </div>
-       <!--  -->
+        <button class="btn btn-success" (click)="ShowAllcomments()"> Comments {{BlogData?.PublicComment}}</button>
+        <button class="btn btn-success"   (click)="ShowMyComments()" *ngIf="MyCommentButton==true">My Comments  {{MyCommentsLength}}</button>
     </div>
 
 </div>
@@ -62,10 +51,16 @@
 [Ycoordinator]="TopPos"
 ></app-comment>
 
+<!--public comment show-->
+<app-all-comments
+*ngIf="ShowAllComments==true"
+></app-all-comments>
 
-
-
-
+<!--show my comments-->
+<app-my-comments
+    *ngIf="ShowMycomments==true"
+>
+</app-my-comments>
 
 
 

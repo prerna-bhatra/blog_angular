@@ -9,6 +9,7 @@ import {IEBlog} from './write-blog/writeblog'
 import {IEreadblogvalue} from './readblog/readblog'
 import {IEMyBlog} from './myblog/myblog'
 import {IEcomment} from './readblog/comment/comment'
+import {IEallComments} from './readblog/all-comments/all-comments'
 import { BehaviorSubject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
@@ -106,7 +107,7 @@ export class ConfigService {
   
   PublishComment(CommentData:IEcomment):Observable<any>{
     this.getToken()
-    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/${this.decoded.payLoad._id}`,CommentData)
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/${this.decoded.payLoad._id}/${CommentData.BlogId}`,CommentData)
   }
   
   ReadAllComments(blogId:IEreadblogvalue):Observable<any>{
@@ -118,10 +119,13 @@ export class ConfigService {
     return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/MyComments/${this.decoded.payLoad._id}/${blogId}`,{})
   }
 
-  
+  // MyCommentsLn
 
 
-
+  ReadMyCommentsLn(blogId:IEreadblogvalue):Observable<any>{
+    this.getToken()
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/MyCommentsLn/${this.decoded.payLoad._id}/${blogId}`,{})
+  }
   
 
 }
