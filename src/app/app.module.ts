@@ -22,6 +22,7 @@ import { CommentComponent } from './readblog/comment/comment.component';
 import { AllCommentsComponent } from './readblog/all-comments/all-comments.component';
 import { MyCommentsComponent } from './readblog/my-comments/my-comments.component';
 import { SearchComponent } from './navbar/search/search.component';
+import { ReaddraftComponent } from './readdraft/readdraft.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SearchComponent } from './navbar/search/search.component';
     CommentComponent,
     AllCommentsComponent,
     MyCommentsComponent,
-    SearchComponent
+    SearchComponent,
+    ReaddraftComponent
   ],
   imports: [
     BrowserModule,

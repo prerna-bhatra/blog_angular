@@ -11,6 +11,7 @@ import {IEMyBlog} from './myblog/myblog'
 import {IEdraft} from './draft/draft'
 import {IEcomment} from './readblog/comment/comment'
 import {IEallComments} from './readblog/all-comments/all-comments'
+import {IEAdraft,IEpublishDraft} from './readdraft/readdraft'
 import { BehaviorSubject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
@@ -133,7 +134,27 @@ export class ConfigService {
     this.getToken()
     return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/drafts/${this.decoded.payLoad._id}`,{})
   }  
+//read a particular draft
+  ReadADraft(blogId:IEAdraft):Observable<any>{
+    this.getToken()
+    return this.http.get(`https://desolate-sierra-34755.herokuapp.com/api/EditDraftfetch/${this.decoded.payLoad._id}/${blogId}`,{})
+  }
 
+  //make the draft public
+  PublishDraft(blogId:IEAdraft,DraftId:IEAdraft,FormData:IEpublishDraft):Observable<any>{
+    this.getToken()
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/}`,FormData)
+  }
+
+  //create The draft
+
+  CreateDraft(blogId:IEAdraft,FormData:IEpublishDraft):Observable<any>{
+    this.getToken()
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/EditDraft/${this.decoded.payLoad._id}/${blogId}`,FormData)
+  }
   
+
+
+
 
 }

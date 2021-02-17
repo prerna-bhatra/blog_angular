@@ -1,0 +1,79 @@
+<div class="container" id="ReadDraft">
+    <div class="row">
+        <div class="col-md-8">
+            <form [formGroup]="form"  id="WriteBlogForm">
+                <div class="form-group">
+                      <label for="name">Heading</label>
+                      <input 
+                          formControlName="Heading"
+                          id="Heading" 
+                          type="text" 
+                          class="form-control"
+                          required>
+                      <!-- <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                          <div *ngIf="f.name.errors.required">Name is required.</div>
+                      </div> -->
+                  </div>
+              
+                  <div class="form-group">
+                      <label for="name">Content</label>
+                      <textarea 
+                          formControlName="Content"
+                          id="Content" 
+                          class="form-control"
+                          required>
+                      </textarea>
+                      <!-- <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                          <div *ngIf="f.name.errors.required">Name is required.</div>
+                      </div> -->
+                  </div>
+                    
+                  <div class="form-group">
+                      <label for="file">File</label>
+                      <input 
+                          formControlName="file"
+                          id="file" 
+                          type="file" 
+                          class="form-control"
+                          (change)="onFileChange($event)"
+                          accept="image/x-png,image/gif,image/jpeg"
+                          required
+                          >
+
+
+                        <img [src]="LatestImg">
+                      <!-- <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                          <div *ngIf="f.file.errors.required">File is required.</div>
+                      </div> -->
+                  </div>
+              
+              
+                 
+                   
+                  <button (click)="PublishDraft()" class="btn btn-primary" type="submit">Publish </button>
+                  <button (click)="CreateDraft()" class="btn btn-primary" type="submit">New Draft</button>
+              </form>
+        </div>
+        <div class="col-md-4">
+             <h3>Total Versions &nbsp; &nbsp; {{TotalVersion}}</h3>
+             <div id="AllVersions">
+                 <div id="Version1" (click)="ClickVersion0()">
+                        1.0.0
+                 </div>
+               <div *ngFor="let Draft of DraftData" id="Versions" (click)="ClickAnyExcept0Vesion(Draft._id,Draft.EditedHeading,Draft.EditedContent)">
+                    {{Draft.major}}.{{Draft.minor}}.{{Draft.build}}
+               </div>
+             </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+#ReadDraft
+{
+    margin-top: 60px;
+}
+#Version1{
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+
+}
+#Versions
+{
+    margin-top: 2px;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+}
+
+#Version1:hover
+{
+    background-color: gray;
+}
+#Versions:hover
+{
+    background-color: gray;
+}

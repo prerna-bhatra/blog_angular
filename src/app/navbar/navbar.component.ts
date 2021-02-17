@@ -95,6 +95,7 @@ export class NavbarComponent implements OnInit {
      
       if($event.key!='Enter')
       {
+        console.log("result",result)
         this.SearchOnEnter=false
         console.log("result before enter",result)
         console.log("ohho")

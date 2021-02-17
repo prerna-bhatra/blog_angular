@@ -10,6 +10,7 @@ import {WriteBlogComponent} from './write-blog/write-blog.component'
 import {ReadblogComponent} from './readblog/readblog.component'
 import {MyblogComponent} from './myblog/myblog.component'
 import {DraftComponent} from './draft/draft.component'
+import {ReaddraftComponent} from './readdraft/readdraft.component'
 const routes: Routes = [
   {path:'',component:HomeComponent},
   { path: 'login', component: LoginFormComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'nav',component:NavbarComponent},
   {path:'stories',component:MyblogComponent},
   {path:'drafts',component:DraftComponent},
+  {path:'readdraft/:blogId',component:ReaddraftComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
 

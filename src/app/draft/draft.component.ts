@@ -22,7 +22,7 @@ export class DraftComponent implements OnInit {
       err=>
       {
         console.log("err",err)
-        alert(err)
+        // alert(err)
       })
     
   }

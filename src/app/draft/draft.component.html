@@ -1,6 +1,6 @@
 <div class="container" id="DraftArea">
     <div *ngFor="let draft of Drafts" id="draft">
-           <a>
+           <a [routerLink]="['/readdraft',draft._id]" routerLinkActive="active">
             <h2><b>{{draft.BlogHeading}}</b></h2>
            </a>
     </div>

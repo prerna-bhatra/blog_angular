@@ -88,7 +88,7 @@ export class WriteBlogComponent implements OnInit {
     }
 
   }
-
+//hashtag
   addThis(a:any)
   {
     //console
