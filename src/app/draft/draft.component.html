@@ -4,4 +4,7 @@
             <h2><b>{{draft.BlogHeading}}</b></h2>
            </a>
     </div>
+    <div *ngIf="NoDrafts===true">
+        <h1 class="text text-danger">Sorry! You have not created any drafts yet</h1>
+    </div>
 </div>

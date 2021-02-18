@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service'
 import { NavbarService } from '../navbar/navbar.service'
+import {MyblogPipe} from './myblog.pipe'
 import {IEMyBlog} from './myblog'
 import * as moment from 'moment';
 import * as _ from "lodash";
@@ -15,6 +16,7 @@ let  GraphData:any
 })
 export class MyblogComponent implements OnInit {
   
+  searchText = '';
   NoDataFound:any=false
   MyBlogs:any
   GraphBlogId:any

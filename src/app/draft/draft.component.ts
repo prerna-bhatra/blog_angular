@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service'
+import { NavbarService } from '../navbar/navbar.service'
 import {IEdraft} from './draft'
 
 @Component({
@@ -10,14 +11,20 @@ import {IEdraft} from './draft'
 export class DraftComponent implements OnInit {
 
   Drafts:any
-  constructor(private service:ConfigService) { }
+  NoDrafts:boolean=false
+  constructor(private service:ConfigService,public nav:NavbarService) { }
 
   ngOnInit(): void {
+    this.nav.hide()
     this.service.ReadDraft()
     .subscribe(res=>
       {
          console.log("drafts",res)
         this.Drafts=res.data
+        if(this.Drafts.length==0)
+        {
+          this.NoDrafts=true
+        }
       },
       err=>
       {
@@ -25,6 +32,7 @@ export class DraftComponent implements OnInit {
         // alert(err)
       })
     
+
   }
 
 }

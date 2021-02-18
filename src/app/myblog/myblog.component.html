@@ -3,8 +3,9 @@
         <google-chart [title]="charTitle"  [type]="charttype" [data]="ArrayFromGraphData" [columns]="chartColumns" [options]="myOptions" >
         </google-chart>
     </div>
-    <div class="row">
-        <div id="MyBlogDivSingle"  *ngFor="let myblog of MyBlogs.data" class="col-md-12" >
+    <div class="row" *ngIf="NoDataFound==false">
+        <input id="SearchMyBlog" placeholder="SearchMyBlog" class="form-control"  [(ngModel)]="searchText">
+        <div id="MyBlogDivSingle"  *ngFor="let myblog of MyBlogs.data | myblogfilter:searchText" class="col-md-12" >
             <div id="MyBlogId">
                <a [routerLink]="['/read',myblog._id]" routerLinkActive="active"> 
                    <h3>{{myblog.BlogHeading}}</h3>
@@ -31,5 +32,5 @@
 
 
 <div *ngIf="NoDataFound==true">
-<p class="text text-danger">Sorry! You have not created any post yet</p>
+<h1 class="text text-danger">Sorry! You have not created any post yet</h1>
 </div>
