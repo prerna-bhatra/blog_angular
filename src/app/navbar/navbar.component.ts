@@ -113,7 +113,7 @@ export class NavbarComponent implements OnInit {
         this.SearchOnEnter=false
         console.log("result before enter",result)
         console.log("ohho")
-        this.SearchedData=result.data
+        this.SearchedData=result.data.SearchedData
         console.log("PLEASE")
         console.log("store data", this.SearchedData)
         // this.LoadSearchApi=true
