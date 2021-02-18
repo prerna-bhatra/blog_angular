@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit ,AfterViewInit, ElementRef,ViewChild} from '@angular/core';
 import { ActivatedRoute ,Params,Router } from "@angular/router";
 import {ConfigService} from '../config.service'
+import { NavbarService } from '../navbar/navbar.service'
 import {IEreadblogvalue,IEallComments,IEmyComments} from './readblog'
 
 
@@ -32,9 +33,13 @@ export class ReadblogComponent implements OnInit {
   AllComments:any
   MyCommentsLength:any
   
-  constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService,private http:HttpClient) { }
+  constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService,private http:HttpClient,public nav:NavbarService) { }
 
   ngOnInit(): void {
+    this.nav.ClearInput=' '
+    // this.nav.HideSearch=!this.nav.HideSearch
+    console.log("navbar input value",this.nav.ClearInput)
+   
     this.router.paramMap
     .subscribe(paramas=>
       {
@@ -45,6 +50,8 @@ export class ReadblogComponent implements OnInit {
         this.Service.ReadBlog(blogParam.BlogId)
         .subscribe(result=>{
           
+          this.nav.ClearInput=' '
+          this.nav.HideSearch=!this.nav.HideSearch
           console.log("result ",result)
           if(result.data){
             this.BlogData=result.data

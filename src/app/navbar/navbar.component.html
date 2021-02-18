@@ -20,7 +20,7 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <input *ngIf="nav.visible==true" class="form-control" id="SearchInputNav" placeholder="Search Tag Name" (keyup)="showSearchResult($event)">
+            <input *ngIf="nav.visible==true" [(ngModel)]="nav.ClearInput" class="form-control" id="SearchInputNav" placeholder="Search Tag Name" (keyup)="showSearchResult($event)">
           </li>
           <app-search 
           [SearchedData]="SearchedData"

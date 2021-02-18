@@ -1,4 +1,4 @@
-<div id="SearchArea">
+<div id="SearchArea" *ngIf="nav.HideSearch===true">
     <div *ngFor="let Searcheditem of SearchedData" id="FoundData">
         <a [routerLink]="['/read',Searcheditem._id]" routerLinkActive="active">
          <h4><b>{{Searcheditem.Headings}}</b></h4>

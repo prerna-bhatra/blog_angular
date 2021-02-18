@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute ,Params,Router } from "@angular/router";
+import { NavbarService } from '../navbar/navbar.service'
 import {FormsModule,ReactiveFormsModule,FormGroup,FormControl,Validators} from '@angular/forms'
 import {ConfigService} from '../config.service'
 import {IEAdraft} from './readdraft'
@@ -13,7 +14,7 @@ import { isArray } from 'lodash';
 })
 export class ReaddraftComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService) { }
+  constructor(private router:ActivatedRoute,private route:Router , private Service:ConfigService,public nav:NavbarService) { }
 
   
   DraftData:any
@@ -29,6 +30,8 @@ export class ReaddraftComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.nav.hide()
+    
     this.router.paramMap
     .subscribe(paramas=>
       {

@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   SearchedData:any
   SearchOnEnter:any
   noDataFound:any
+  
 
   
   constructor(private router: Router,private service:ConfigService,private location: Location,public nav: NavbarService) { 
@@ -85,6 +86,7 @@ export class NavbarComponent implements OnInit {
 
   showSearchResult($event:any)
   {
+    this.nav.HideSearch=true
     this.SearchedData=''
     let SendingData:IEsearchitem = {searchValue: ''};
   //  this.Searching=true
