@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {ConfigService} from '../config.service'
 import {IEsearchitem} from './home'
+import { NavbarService } from '../navbar/navbar.service'
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
@@ -27,9 +28,10 @@ export class HomeComponent implements OnInit {
   TrendingBlogImgsArr:any=[]
   NewBlogImgArr:any=[]
   MoreBlogImgAr:any=[]
-  constructor(private http:HttpClient,private service:ConfigService) { }
+  constructor(private http:HttpClient,private service:ConfigService,public nav:NavbarService) { }
 
   ngOnInit(): void {
+    this.nav.show()
       this.service.FetchTrendingBlogs().subscribe((data: any)=>
       {
         this.TrendingBlogs = data.result; 

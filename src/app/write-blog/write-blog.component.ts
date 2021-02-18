@@ -5,6 +5,8 @@ import {ConfigService} from '../config.service'
 import { HttpClient } from '@angular/common/http';
 import { IEBlog } from './writeblog';
 import { fromEventPattern } from 'rxjs';
+import {GlobalVarible} from '../GlobalConstant'
+import { NavbarService } from '../navbar/navbar.service'
 import jwt_decode from 'jwt-decode';
 
 
@@ -18,7 +20,7 @@ export class WriteBlogComponent implements OnInit {
  
    data = new FormData();
    FileName:string=''
-  constructor(private router:Router,private WriteBlogService:ConfigService,private http: HttpClient) { 
+  constructor(private router:Router,private WriteBlogService:ConfigService,private http: HttpClient, public nav: NavbarService) { 
   //console.log(this.userId.user)
   }
 
@@ -28,6 +30,12 @@ export class WriteBlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogin()
+    this.nav.hide()
+    let v=new GlobalVarible()
+    v.ShowSearchInputValue=false
+
+    console.log("in write comp",v.ShowSearchInputValue)
+    
   }
 
   checkLogin()

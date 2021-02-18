@@ -1,9 +1,11 @@
 import { Component, OnInit ,Input,Output} from '@angular/core';
+import { Location } from '@angular/common';
 import {Router} from '@angular/router'
 import {IEsearchitem} from './search/search'
 import {ConfigService} from '../config.service'
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-
+import {NavbarService} from './navbar.service'
+import {GlobalVarible} from '../GlobalConstant'
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +15,14 @@ import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs
 export class NavbarComponent implements OnInit {
   LoginCheck:boolean
   isUserLoggedIn: boolean;
+  ShowSearchInput:boolean;
   ShowSearch:boolean=false
   SearchedData:any
   SearchOnEnter:any
   noDataFound:any
 
-  constructor(private router: Router,private service:ConfigService) { 
+  
+  constructor(private router: Router,private service:ConfigService,private location: Location,public nav: NavbarService) { 
     this.service.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
   });
@@ -28,6 +32,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     console.log("NAVBAR")
     this.checkLogin()
+    // console.log("comp", this.constructor.name)
+    // console.log(this.location.path());
+    let v=new GlobalVarible()
+    // if(v.ShowSearchInputValue===false)
+    // {
+    //   v.ShowSearchInputValue=true
+    // }
+    this.ShowSearchInput=v.ShowSearchInputValue
+     console.log("Global Varible",v.ShowSearchInputValue)
+     
     
   }
 

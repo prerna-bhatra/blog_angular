@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service'
+import { NavbarService } from '../navbar/navbar.service'
 import {IEMyBlog} from './myblog'
 import * as moment from 'moment';
 import * as _ from "lodash";
@@ -31,10 +32,11 @@ export class MyblogComponent implements OnInit {
   //GraphData:any
   // UserId=JSON.parse(localStorage.getItem('User'))
 
-  constructor(private MyBlogServices:ConfigService) { }
+  constructor(private MyBlogServices:ConfigService,public nav:NavbarService) { }
   
 
   ngOnInit(): void {
+    this.nav.show()
     var myBlogData=new IEMyBlog()
     this.MyBlogServices.FetchMyBlog()
     .subscribe(result=>{
