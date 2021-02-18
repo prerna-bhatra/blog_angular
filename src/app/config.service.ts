@@ -143,7 +143,9 @@ export class ConfigService {
   //make the draft public
   PublishDraft(blogId:IEAdraft,DraftId:IEAdraft,FormData:IEpublishDraft):Observable<any>{
     this.getToken()
-    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/comment/}`,FormData)
+    console.log("DRaftId",DraftId)
+    console.log("formdata",FormData)
+    return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/PublishEditedDraft/${this.decoded.payLoad._id}/${blogId}/${DraftId}`,FormData)
   }
 
   //create The draft
@@ -153,7 +155,7 @@ export class ConfigService {
     return this.http.post(`https://desolate-sierra-34755.herokuapp.com/api/EditDraft/${this.decoded.payLoad._id}/${blogId}`,FormData)
   }
   
-
+  
 
 
 

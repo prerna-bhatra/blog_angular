@@ -93,22 +93,52 @@ export class ReaddraftComponent implements OnInit {
   }
 
 
-
-
-
   PublishDraft(){
+    var DraftParam=new IEAdraft()
+    DraftParam.DraftId=this.LatestDraftId
+    console.log("DraftiD HEY HEY",DraftParam.DraftId)
+    if(DraftParam.DraftId===undefined)
+    {
+      DraftParam.DraftId=0
+    }
+    this.data.append('BlogImg',this.form.get('fileSource').value)
+    console.log("heading and content",this.form.value.Heading,this.form.value.Content)
+    this.data.append("BlogHeading",this.form.value.Heading)
+    this.data.append('BlogContent',this.form.value.Content)
+    // this.data.append("DummyId",DraftParam.DraftId)
+    // console.log(this.data)
+    
+    
+    this.router.paramMap
+    .subscribe(paramas=>
+      {
+       DraftParam.BlogId=paramas.get('blogId')
+       this.Service.PublishDraft( DraftParam.BlogId, DraftParam.DraftId,this.data)
+       .subscribe(PublishedDraftData=>
+        {
+          console.log("PublishedDraftData",PublishedDraftData)
 
+        },
+        err=>
+        {
+          console.log("PublishedDraftData",err)
+        })
+      })
   }
-//when create ddraft is clicked
+
+
+//when create draft is clicked
   CreateDraft()
   {
     var DraftParam=new IEAdraft()
     DraftParam.DraftId=this.LatestDraftId
     console.log('img',this.form.get('fileSource').value)
+    
     this.data.append('EditedImg',this.form.get('fileSource').value)
     this.data.append("EditedHeading",this.form.value.Heading)
     this.data.append('EditedContent',this.form.value.Content)
     this.data.append("DummyId",DraftParam.DraftId)
+    
 
     // console.log("data of form",this.data)
 
@@ -145,6 +175,7 @@ export class ReaddraftComponent implements OnInit {
   {
     //image change will be handled by backend if image is not choosen 
     this.form.patchValue({ Heading: this.BlogData.data.BlogHeading ,Content:this.BlogData.data.BlogContent });
+    console.log("LALALAL",this.BlogData.data._id)
     this.LatestImg=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${this.BlogData.data._id}`
   }
 
@@ -174,7 +205,7 @@ export class ReaddraftComponent implements OnInit {
                 console.log('no additional version')
                  this.LatestHeading=this.BlogData.data.BlogHeading
                  this.LatestContent=this.BlogData.data.BlogContent
-                 this.LatestImg=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${this.BlogData._id}`
+                 this.LatestImg=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${this.BlogData.data._id}`
                  console.log("latest Values",this.LatestHeading,this.LatestContent,this.LatestImg)
               }
               else{
